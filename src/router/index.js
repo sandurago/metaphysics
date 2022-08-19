@@ -1,6 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import CategoryView from '../views/CategoryView.vue'
+import LoginFormView from '../views/LoginFormView.vue'
 
 const routes = [
   {
@@ -8,6 +9,13 @@ const routes = [
     name: 'home',
     component: HomeView
   },
+
+  {
+    path: '/login',
+    name: 'login',
+    component: LoginFormView
+  },
+
   {
     path: '/category/:categoryName',
     name: 'category',

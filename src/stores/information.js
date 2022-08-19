@@ -4,7 +4,6 @@ export const useInformationStore = defineStore('information', {
   state: () => ({
     name: "",
     nickname: "",
-    age: null,
     email: "",
   }),
 
@@ -23,5 +22,11 @@ export const useInformationStore = defineStore('information', {
           this[data.inputTitle] = data.userEnteredData;
         });
     },
+
+    clearData () {
+      this.name = "";
+      this.nickname = "";
+      this.email = "";
+    }
   }
 })

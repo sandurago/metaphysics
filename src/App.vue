@@ -24,14 +24,24 @@
   </nav>
   <div class="p-4">
     <ShoppingCart v-if="cartStore.isCartVisible" />
-    <h3 class="ml-auto -mb-10 pr-10 px-2 leading-10 w-fit">
+
+    <h3 class="ml-auto -mt-4 -mb-10 px-2 leading-10 w-fit">
       <template v-if="loginStore.isLoggedIn">
         Logged in as: {{ informationStore.nickname }} ({{
             informationStore.email
-        }})
+        }}). <button
+          @click="logOut"
+          type="button"
+          class="underline decoration-solid"
+        >Log out</button>
       </template>
       <template v-else>
-        Not logged in
+        Not logged in.
+        <button
+          @click="displayLogin"
+          type="button"
+          class="underline decoration-solid"
+        >Log in</button> now
       </template>
     </h3>
     <router-view />
@@ -54,5 +64,18 @@ export default {
   computed: {
     ...mapStores(useInformationStore, useLoginStore, useCartStore),
   },
+
+  methods: {
+    displayLogin () {
+      this.$router.push({
+        path: '/login'
+      })
+    },
+
+    logOut () {
+      this.loginStore.logOut();
+      this.informationStore.clearData();
+    }
+  }
 }
 </script>

@@ -1,12 +1,15 @@
 <template>
-  <div v-if="isVisible" class="w-fit my-4 mx-auto text-center">
+  <div
+    v-if="isVisible"
+    class="w-fit my-4 mx-auto text-center"
+  >
     <div
       v-for="(dataInformation, index) in basicInformationData"
       :key="index"
       class="py-2 flex justify-between"
     >
       <label :for="dataInformation.inputTitle">{{
-        dataInformation.description
+          dataInformation.description
       }}</label>
       <input
         v-model="dataInformation.userEnteredData"
@@ -27,7 +30,7 @@
         hover:text-white hover:bg-sky-700 hover:border-white
       "
     >
-      Log In
+      Submit
     </button>
   </div>
 </template>
@@ -40,7 +43,7 @@ import { mapStores } from "pinia";
 export default {
   emits: ["close-window"],
 
-  data() {
+  data () {
     return {
       basicInformationData: [
         {
@@ -54,12 +57,6 @@ export default {
           inputType: "text",
           inputTitle: "nickname",
           userEnteredData: "",
-        },
-        {
-          description: "Age: ",
-          inputType: "number",
-          inputTitle: "age",
-          userEnteredData: null,
         },
         {
           description: "Email: ",
@@ -78,11 +75,12 @@ export default {
   },
 
   methods: {
-    onClick() {
+    onClick () {
       this.informationStore.updateState(this.basicInformationData);
       this.loginStore.showLoggedIn();
-      this.isVisible = false;
-      this.$emit("close-window");
+      this.$router.replace({
+        path: '/'
+      })
     },
   },
 };
