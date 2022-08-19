@@ -34,29 +34,18 @@ export default {
   },
 
   methods: {
+    /**
+     * compares the value of a parameter to the string ('T-shirts', 'Skirts' or 'Heels')
+     * and redirects to the correct page.
+     * @param {String} product item category from 'productCategories' array.
+     */
     onClick (product) {
-      if (product === 'T-shirts') {
-        this.$router.push({
-          name: 'category',
-          params: {
-            categoryName: 't-shirts',
-          }
-        })
-      } else if (product === 'Skirts') {
-        this.$router.push({
-          name: 'category',
-          params: {
-            categoryName: 'skirts',
-          }
-        })
-      } else if (product === 'Heels') {
-        this.$router.push({
-          name: 'category',
-          params: {
-            categoryName: 'heels',
-          }
-        })
-      }
+      this.$router.push({
+        name: 'category',
+        params: {
+          categoryName: product.toLowerCase(),
+        }
+      })
     }
   }
 }
