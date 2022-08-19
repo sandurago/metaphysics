@@ -1,8 +1,15 @@
 <template>
   <div>
-    <h3 class="m-10 text-2xl text-center">
-      Hello {{ informationStore.name }}!
+    <h3 class="mt-10 mb-6 text-2xl text-center">
+      Hello
+      <template v-if="informationStore.name !== ''">
+        {{ informationStore.name }}!
+      </template>
+      <template v-else>
+        User!
+      </template>
     </h3>
+    <p class="pb-2 text-center">Welcome to The Online Store. We wish you a happy shopping!</p>
   </div>
 </template>
 
