@@ -1,0 +1,48 @@
+[
+  {
+    "productName": "T-shirt",
+    "productColors": {
+      "pink": "./img/tshirt-pink.jpeg",
+      "red": "./img/tshirt-red.jpeg",
+      "black": "./img/tshirt-black.png"
+    },
+    "productSize": [
+      "S",
+      "M",
+      "L"
+    ],
+    "productDescription": "T-shirt for summer",
+    "productPrice": 15
+  },
+  {
+    "productName": "Skirt",
+    "productColors": {
+      "green": "./img/skirt-green.jpeg",
+      "purple": "./img/skirt-purple.jpeg",
+      "yellow": "./img/skirt-yellow.jpeg"
+    },
+    "productSize": [
+      "S",
+      "M",
+      "L"
+    ],
+    "productDescription": "Skirt for summer",
+    "productPrice": 25
+  },
+  {
+    "productName": "Heels",
+    "productColors": {
+      "brown": "./img/heels-brown.jpeg",
+      "navy": "./img/heels-navy.webp",
+      "red": "./img/heels-red.jpeg"
+    },
+    "productSize": [
+      37,
+      38,
+      39,
+      40
+    ],
+    "productDescription": "Heels for summer",
+    "productPrice": 30
+  }
+]

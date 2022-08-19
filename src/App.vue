@@ -1,30 +1,58 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+  <nav class="flex h-10 bg-red-100 px-10">
+    <router-link
+      to="/"
+      class="px-2 leading-10 hover:text-rose-500"
+    >Home</router-link>
+    <router-link
+      to="/category/t-shirts"
+      class="px-2 leading-10 hover:text-rose-500"
+    >T-shirts</router-link>
+    <router-link
+      to="/category/skirts"
+      class="px-2 leading-10 hover:text-rose-500"
+    >Skirts</router-link>
+    <router-link
+      to="/category/heels"
+      class="px-2 leading-10 hover:text-rose-500"
+    >Heels</router-link>
+    <button
+      @click="cartStore.showCart"
+      type="button"
+      class="ml-auto hover:text-rose-500"
+    >Cart ({{ cartStore.itemsInCart }})</button>
   </nav>
-  <router-view/>
+  <div class="p-4">
+    <ShoppingCart v-if="cartStore.isCartVisible" />
+    <h3 class="ml-auto -mb-10 pr-10 px-2 leading-10 w-fit">
+      <template v-if="loginStore.isLoggedIn">
+        Logged in as: {{ informationStore.nickname }} ({{
+            informationStore.email
+        }})
+      </template>
+      <template v-else>
+        Not logged in
+      </template>
+    </h3>
+    <router-view />
+  </div>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+import ShoppingCart from '@/components/ShoppingCart.vue'
+import { useCartStore } from '@/stores/cart'
+import { useInformationStore } from "@/stores/information";
+import { useLoginStore } from "@/stores/login";
+import { mapStores } from 'pinia'
 
-nav {
-  padding: 30px;
-}
+export default {
 
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
+  components: {
+    ShoppingCart,
+  },
 
-nav a.router-link-exact-active {
-  color: #42b983;
+  computed: {
+    ...mapStores(useInformationStore, useLoginStore, useCartStore),
+  },
 }
-</style>
+</script>

@@ -1,18 +1,35 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <FormBasicInfo @close-window="showMainContent" />
+    <div v-if="isVisible">
+      <Greetings />
+      <MainPageContent />
+    </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import FormBasicInfo from "@/components/FormBasicInfo.vue";
+import Greetings from "@/components/Greetings.vue";
+import MainPageContent from "@/components/MainPageContent.vue";
 
 export default {
-  name: 'HomeView',
   components: {
-    HelloWorld
-  }
-}
+    FormBasicInfo,
+    Greetings,
+    MainPageContent,
+  },
+
+  data () {
+    return {
+      isVisible: true,
+    };
+  },
+
+  methods: {
+    showMainContent () {
+      this.isVisible = true;
+    },
+  },
+};
 </script>
