@@ -75,6 +75,10 @@ export default {
   },
 
   methods: {
+    /**
+     * fires actions in Pinia: updates login information & displays logged in user,
+     * redirects to the home page. 
+     */
     onClick () {
       this.informationStore.updateState(this.basicInformationData);
       this.loginStore.showLoggedIn();

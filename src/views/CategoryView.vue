@@ -24,8 +24,8 @@ export default {
 
   methods: {
     /**
-     * Load a product thanks to the route params.
-     * @param {String} categoryName The category name from the route params.
+     * loads a product based on the category from parameters.
+     * @param {String} categoryName category name from the route params.
      */
     loadProductFromParams (categoryName) {
       if (categoryName === 't-shirts') {
@@ -40,9 +40,9 @@ export default {
 
   watch: {
     /**
-     * Triggered when the route params (/category/>t-shirts< or /category/>skirts<) has changed.
-     * @param {String} newCategoryName The new value of the category name (either "t-shirts" or "skirts").
-     * @param {String} _oldCategoryName The previous value of the category name (either "t-shirts" or "skirts").
+     * triggered when the route param has changed, fires the given method.
+     * @param {String} newCategoryName the new value of the category name.
+     * @param {String} _oldCategoryName the previous value of the category name.
      */
     '$route.params.categoryName' (newCategoryName, _oldCategoryName) {
       this.loadProductFromParams(newCategoryName);
@@ -50,30 +50,10 @@ export default {
   },
 
   created () {
-    // Load product when we "arrive" on this page for the first time (from a different page)
+    /**
+     * loads the product from a parameter when the page is entered for the first time.
+     */
     this.loadProductFromParams(this.$route.params.categoryName);
-
-    // const whatToWatch = function() {
-    //   return this.$route.params.categoryName;
-    // };
-
-    // const whatToDo = function(newCategoryName, _oldCategoryName) {
-    //   this.loadProductFromParams(newCategoryName);
-    // };
-
-    // this.$watch(whatToWatch, whatToDo);
-
-    // When the "route params" change, we load the new product according to those new params.
-    // This happens when we already are on the category view page, and we chose a new category.
-    this.$watch(
-      function () {
-        return this.$route.params;
-      },
-      function (toParams, _previousParams) {
-        // react to route changes...
-        this.loadProductFromParams(toParams);
-      }
-    )
   }
 }
 </script>
