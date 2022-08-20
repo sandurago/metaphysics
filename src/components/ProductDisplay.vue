@@ -71,26 +71,36 @@ export default {
   },
 
   watch: {
+    /**
+     * displays the first available color and size of the clicked product
+     * @param {Object} newProduct product to display in the array of items (items.json).
+     */
     product (newProduct) {
       this.selectedColor = Object.keys(newProduct.productColors)[0];
       this.selectedSize = newProduct.productSize[0];
     },
-    // selectedSize(newSize) { (for practice)
-    //   console.log('selected size is ' + newSize);
-    // }
   },
 
   computed: {
     ...mapStores(useCartStore),
 
+    /**
+     * returns the value of selected color.
+     */
     selectedColorImage () {
       return this.product.productColors[this.selectedColor];
     },
 
+    /**
+     * returns the color name (key).
+     */
     productColorsNames () {
       return Object.keys(this.product.productColors);
     },
 
+    /**
+     * animates the 'Add to cart' button once it's clicked
+     */
     transition () {
       return this.isTransition ? {
         "background-color": "rgb(125 211 252 / var(--tw-border-opacity)",
@@ -100,14 +110,18 @@ export default {
   },
 
   methods: {
+    /**
+     * overrides selectedColor with the color in a parameter.
+     * @param {String} color product color
+     */
     selectColor (color) {
       this.selectedColor = color;
     },
 
     /**
-     * Gives the correct styles to a color bubble.
+     * Gives the correct style to a color ball.
      * Gives it a background and a border (blue if selected, white if not).
-     * @param {String} color The color name ("pink", "red", "black").
+     * @param {String} color The color name.
      */
     colorStyle (color) {
       return {
@@ -116,10 +130,18 @@ export default {
       };
     },
 
+    /**
+     * overrides selectedSize with the value in a parameter.
+     * @param {String} size the size of a product
+     */
     selectSize (size) {
       this.selectedSize = size;
     },
 
+    /**
+     * adds styling to a selected size.
+     * @param {String} size the size of a product.
+     */
     sizeStyle (size) {
       const isSizeSelected = size == this.selectedSize;
       return isSizeSelected ? {
@@ -131,13 +153,26 @@ export default {
       } : null;
     },
 
+    /**
+     * adds or substracts the quantity accordingly to the parameter. Stops substract action at 1.
+     * @param {String} param plus ('+') or minus ('-') sign.
+     */
     updateQuantity (param) {
-      param == '-' ? this.quantity -= 1 : this.quantity += 1;
+      if (param === '-') {
+        this.quantity--;
+      } else {
+        this.quantity++;
+      }
       if (this.quantity < 1) {
         this.quantity = 1;
       }
     },
 
+    /**
+     * forms an object with values to be added to the cart.
+     * Fires action in Pinia with given object as parameter.
+     * Resets the quantity, allows the animation of 'Add to Cart' to occur.
+     */
     add () {
       const objectToAdd = {
         name: this.product.productName,

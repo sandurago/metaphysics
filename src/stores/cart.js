@@ -7,6 +7,11 @@ export const useCartStore = defineStore('cart', {
   }),
 
   getters: {
+    /**
+     * calculates total price by multiplying quality and price of products. 
+     * @param {Object} state the current value of the state.
+     * @returns {Number} total price of added items in cart.
+     */
     total (state) {
       let totalPrice = 0;
       for (let i = 0; i < state.cart.length; i++) {
@@ -15,6 +20,11 @@ export const useCartStore = defineStore('cart', {
       return totalPrice;
     },
 
+    /**
+     * checks for the quantity of each item in cart and calculates it.
+     * @param {Object} state the current value of the state.
+     * @returns {Number} the quantity of the items in cart.
+     */
     itemsInCart (state) {
       let totalQuantity = 0;
       for (let i = 0; i < state.cart.length; i++) {
@@ -26,7 +36,9 @@ export const useCartStore = defineStore('cart', {
 
   actions: {
     /**
-     * adds to cart
+     * checks if item is already in the cart.
+     * if yes, increases its quantity by the given amount.
+     * if not, adds it to the cart. 
      * @param {Object} item the item's properties that are going to be added to the cart
      */
     addToCart (item) {
@@ -39,13 +51,12 @@ export const useCartStore = defineStore('cart', {
     },
 
     /**
-     * Check if the item is already in the cart, and return its position.
-     * @param {Object} item The item to check if it’s already in the cart.
-     * @returns {Number} `-1` if found, position otherwise.
+     * checks if the item is already in cart, and returns its position.
+     * @param {Object} item the item to check if it’s already in the cart.
+     * @returns {Number} `-1` if not found, position otherwise.
      */
     isItemInCart (item) {
       return this.cart.findIndex(function (itemInCart) {
-        // Compare all the important properties of the item.
         return itemInCart.name == item.name && itemInCart.color == item.color && itemInCart.size == item.size;
       })
     },
